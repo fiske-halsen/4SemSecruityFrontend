@@ -54,13 +54,36 @@ function apiFacade() {
 
     let role = getRole();
 
-    return fetch(URL + "/api/info/" + role, options).then(handleHttpErrors);
+    return fetch(URL + "/api/order/" + role, options).then(handleHttpErrors);
   };
 
-  const fetchStarwars = () => {
+  const fetchAllCars = () => {
     const options = makeOptions("GET");
 
-    return fetch(URL + "/api/info/parrallel/", options).then(handleHttpErrors);
+    return fetch(URL + "/api/order/getcars/", options).then(handleHttpErrors);
+  };
+  const fetchAllReservations = () => {
+    const options = makeOptions("GET");
+
+    return fetch(URL + "/api/order/getreservations/", options).then(handleHttpErrors);
+  };
+
+  const deleteReservation = (id) => {
+    const options = makeOptions("DELETE");
+
+    return fetch(URL + "/api/order/deletereservation/" + id, options).then(handleHttpErrors);
+  };
+  const addReservation = (reservation) => {
+    const options = makeOptions("PUT", true, {
+      userName: reservation.userName,
+      rentalDays: reservation.rentalDays,
+      brand: reservation.brand,
+      model: reservation.model,
+      year: reservation.year,
+      pricePerDay: reservation.pricePerDay
+    }); //True add's the token
+
+    return fetch(URL + "/api/order/makereservation", options).then(handleHttpErrors);
   };
   const makeOptions = (method, addToken, body) => {
     var opts = {
@@ -86,7 +109,6 @@ function apiFacade() {
     login,
     logout,
     fetchData,
-    fetchStarwars,
     getRole
   };
 }
