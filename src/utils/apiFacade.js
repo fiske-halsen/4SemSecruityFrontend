@@ -19,7 +19,6 @@ function apiFacade() {
 
   const loggedIn = () => {
     const loggedIn = getToken() != null;
-
     return loggedIn;
   };
   const logout = () => {
@@ -31,6 +30,7 @@ function apiFacade() {
       username: user,
       password: password,
     });
+
     return fetch(URL + "/api/login", options)
       .then(handleHttpErrors)
       .then((res) => {
@@ -44,47 +44,54 @@ function apiFacade() {
     let decoedeJsonData = window.atob(tokenData);
     let decodedJwtData = JSON.parse(decoedeJsonData);
     let role = decodedJwtData.roles;
-    console.log(role);
-
     return role;
   };
 
   const fetchData = () => {
     const options = makeOptions("GET", true); //True add's the token
-
     let role = getRole();
-
     return fetch(URL + "/api/order/" + role, options).then(handleHttpErrors);
   };
 
   const fetchAllCars = () => {
     const options = makeOptions("GET");
-
-    return fetch(URL + "/api/order/getcars/", options).then(handleHttpErrors);
+    return fetch(URL + "/api/rental/getcars/", options).then(handleHttpErrors);
   };
-  const fetchAllReservations = () => {
-    const options = makeOptions("GET");
-
-    return fetch(URL + "/api/order/getreservations/", options).then(handleHttpErrors);
+  const fetchAllRentals = () => {
+    const options = makeOptions("GET", true);
+    return fetch(URL + "/api/rental/getrentals/", options).then(
+      handleHttpErrors
+    );
   };
 
-  const deleteReservation = (id) => {
-    const options = makeOptions("DELETE");
-
-    return fetch(URL + "/api/order/deletereservation/" + id, options).then(handleHttpErrors);
+  const deleteRental = (id) => {
+    const options = makeOptions("DELETE", true);
+    return fetch(URL + "/api/rental/deleterental/" + id, options).then(
+      handleHttpErrors
+    );
   };
-  const addReservation = (reservation) => {
+  const addRental = (rental) => {
     const options = makeOptions("PUT", true, {
-      userName: reservation.userName,
-      rentalDays: reservation.rentalDays,
-      brand: reservation.brand,
-      model: reservation.model,
-      year: reservation.year,
-      pricePerDay: reservation.pricePerDay
+      userName: rental.userName,
+      rentalDays: rental.rentalDays,
+      brand: rental.brand,
+      model: rental.model,
+      year: rental.year,
+      pricePerDay: rental.pricePerDay,
     }); //True add's the token
 
-    return fetch(URL + "/api/order/makereservation", options).then(handleHttpErrors);
+    return fetch(URL + "/api/rental/makerental", options).then(
+      handleHttpErrors
+    );
   };
+
+  const editRental = (rental) => {
+    const options = makeOptions("PUT", true, rental); //True add's the token
+    return fetch(URL + "/api/rental/editrental", options).then(
+      handleHttpErrors
+    );
+  };
+
   const makeOptions = (method, addToken, body) => {
     var opts = {
       method: method,
@@ -109,7 +116,12 @@ function apiFacade() {
     login,
     logout,
     fetchData,
-    getRole
+    getRole,
+    fetchAllCars,
+    fetchAllRentals,
+    addRental,
+    editRental,
+    deleteRental,
   };
 }
 

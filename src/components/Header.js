@@ -7,7 +7,7 @@ function Header(props) {
       <ul className="header">
         <li>
           <NavLink exact activeClassName="active" to="/">
-            Home
+            Login
           </NavLink>
         </li>
         <li>
