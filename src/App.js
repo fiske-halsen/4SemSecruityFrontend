@@ -33,9 +33,6 @@ function App() {
     <div>
       <Header />
       <Switch>
-        <Route path="/starwars">
-          <Starwars />
-        </Route>
         {!loggedIn ? (
           <div>
             <Route exact path="/">
