@@ -1,4 +1,4 @@
-import facade from "./apiFacade.js";
+import facade from "../utils/apiFacade.js";
 import React, { useState, useEffect } from "react";
 function Starwars() {
   let obj = {
@@ -6,9 +6,8 @@ function Starwars() {
     planetName: "",
     speciesName: "",
     starshipName: "",
-    vehicleName: ""
-
-  }
+    vehicleName: "",
+  };
 
   const [dataFromServer, setDataFromServer] = useState(obj);
 

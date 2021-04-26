@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import facade from "./apiFacade";
+import facade from "../utils/apiFacade";
 
 function LogIn({ login }) {
   const init = { username: "", password: "" };
@@ -45,4 +45,4 @@ function LoggedIn() {
 }
 
 export default LogIn;
-export  {LoggedIn};
+export { LoggedIn };
