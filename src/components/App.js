@@ -4,7 +4,7 @@ import LogIn, { LoggedIn } from "./LogIn.js";
 import Header from "./Header.js";
 import Starwars from "./Starwars.js";
 import Admin from "./Admin.js";
-import User from "./User.js";
+import AllCars from "./AllCars";
 import { Switch, Route } from "react-router-dom";
 
 function App() {
@@ -48,7 +48,7 @@ function App() {
             <div>
               <Route path="/user">
                 {facade.getRole() === "user" ? (
-                  <User />
+                  <AllCars />
                 ) : (
                   <p>Du er ikke logget ind som user</p>
                 )}

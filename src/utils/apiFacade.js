@@ -47,6 +47,16 @@ function apiFacade() {
     return role;
   };
 
+  const getUserName = () => {
+    let myToken = getToken();
+    let tokenData = myToken.split(".")[1];
+    let decoedeJsonData = window.atob(tokenData);
+    let decodedJwtData = JSON.parse(decoedeJsonData);
+    let username = decodedJwtData.username;
+
+    return username;
+  };
+
   const fetchData = () => {
     const options = makeOptions("GET", true); //True add's the token
     let role = getRole();
@@ -122,6 +132,7 @@ function apiFacade() {
     addRental,
     editRental,
     deleteRental,
+    getUserName,
   };
 }
 
