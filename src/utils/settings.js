@@ -1,3 +1,3 @@
-let URL = "https://localhost:8080/jpareststarter"
+let URL = "http://localhost:8080/jpareststarter"
 
 export {URL};
