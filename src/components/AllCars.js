@@ -43,9 +43,13 @@ const User = () => {
                   <td>{car.year}</td>
                   <td>{car.pricePerDay}</td>
                   <button type="button">
-                    <NavLink id={car.model} to={`${url}/${car.model}`}>
-                      Rent car
-                    </NavLink>
+                    {facade.getToken() ? (
+                      <NavLink id={car.model} to={`${url}/${car.model}`}>
+                        Rent car
+                      </NavLink>
+                    ) : (
+                      <NavLink to={`/`}>Rent car</NavLink>
+                    )}
                   </button>
                 </tr>
               ))}
