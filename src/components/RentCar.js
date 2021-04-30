@@ -14,8 +14,11 @@ const RentCar = ({ allCars }) => {
     year: "",
     pricePerDay: "",
   };
+
   const [carToRent, setCarToRent] = useState(initObj);
+
   useEffect(() => {
+    console.log("klamydia");
     allCars.cars.forEach((car) => {
       if (car.model === model) {
         setCarToRent({ ...car, userName: facade.getUserName() });
