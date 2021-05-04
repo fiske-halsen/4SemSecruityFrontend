@@ -12,25 +12,27 @@ import {
 import EditRental from "./EditRental";
 import { allRentalsObj } from "../utils/types";
 
-const Admin = () => {
+const Admin = ({ reloadTable, setReloadTable }) => {
   const [allRentals, setAllRentals] = useState(allRentalsObj);
   const { path, url } = useRouteMatch();
 
   useEffect(() => {
     facade.fetchAllRentals().then((rentals) => setAllRentals(rentals));
-  }, []);
+    setReloadTable(false);
+  }, [reloadTable]);
 
   const deleteRental = (evt) => {
     evt.preventDefault();
     let rentalId = evt.target.id;
     facade.deleteRental(rentalId);
+    setReloadTable(true);
   };
 
   return (
     <div>
       <Switch>
         <Route path={`${path}/:id`}>
-          <EditRental allRentals={allRentals} />
+          <EditRental allRentals={allRentals} setReloadTable={setReloadTable} />
         </Route>
         <Route exact path={path}>
           <table class="table">

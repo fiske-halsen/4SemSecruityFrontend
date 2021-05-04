@@ -9,7 +9,7 @@ import { Switch, Route } from "react-router-dom";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState("");
-  //const [role, setRole] = useState("");
+  const [reloadTable, setReloadTable] = useState(false);
 
   const logout = () => {
     facade.logout();
@@ -17,14 +17,12 @@ function App() {
   };
 
   const login = (user, pass) => {
-    
     facade
       .login(user, pass)
       .then((res) => setLoggedIn(true), setError(""))
       .catch((err) => {
         setError("Wrong username or password");
       });
-
   };
 
   return (
@@ -38,7 +36,7 @@ function App() {
               <p>{error}</p>
             </Route>
             <Route exact path="/user">
-              <AllCars/>
+              <AllCars />
             </Route>
           </div>
         ) : (
@@ -51,19 +49,33 @@ function App() {
             </div>
             <div>
               <Route path="/user">
-                {(function() {
-        switch (facade.getRole()) {
-          case 'user':
-            return <AllCars />;
-          case 'admin':
-            return <Admin />;
-          default:
-            return <AllCars />;
-        }
-      })()}
+                {(function () {
+                  switch (facade.getRole()) {
+                    case "user":
+                      return (
+                        <AllCars
+                          reloadTable={reloadTable}
+                          setReloadTable={setReloadTable}
+                        />
+                      );
+                    case "admin":
+                      return (
+                        <Admin
+                          reloadTable={reloadTable}
+                          setReloadTable={setReloadTable}
+                        />
+                      );
+                    default:
+                      return (
+                        <AllCars
+                          reloadTable={reloadTable}
+                          setReloadTable={setReloadTable}
+                        />
+                      );
+                  }
+                })()}
               </Route>
             </div>
-         
           </div>
         )}
       </Switch>

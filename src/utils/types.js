@@ -6,6 +6,16 @@ let rentalObj = {
   id: "",
   userName: "",
   rentalDays: "",
+  rentalDate: "",
+  brand: "",
+  model: "",
+  year: "",
+  pricePerDay: "",
+};
+
+let rentCarObj = {
+  userName: "",
+  rentalDays: "",
   brand: "",
   model: "",
   year: "",
@@ -35,4 +45,4 @@ let allRentalsObj = {
   ],
 };
 
-export { allCarsObj, rentalObj, carObj, allRentalsObj };
+export { allCarsObj, rentalObj, carObj, allRentalsObj, rentCarObj };

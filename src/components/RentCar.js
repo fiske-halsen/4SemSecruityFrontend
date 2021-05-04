@@ -2,28 +2,19 @@ import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import facade from "../utils/apiFacade";
 import React, { useState, useEffect } from "react";
+import { rentCarObj } from "../utils/types";
 
-const RentCar = ({ allCars }) => {
+const RentCar = ({ allCars, setReloadTable }) => {
   let { model } = useParams();
 
-  let initObj = {
-    userName: "",
-    rentalDays: "",
-    brand: "",
-    model: "",
-    year: "",
-    pricePerDay: "",
-  };
-
-  const [carToRent, setCarToRent] = useState(initObj);
-
+  const [carToRent, setCarToRent] = useState(rentCarObj);
   useEffect(() => {
-    console.log("klamydia");
     allCars.cars.forEach((car) => {
       if (car.model === model) {
         setCarToRent({ ...car, userName: facade.getUserName() });
       }
     });
+    setReloadTable(false);
   }, [model]);
 
   const onChange = (evt) => {
@@ -36,6 +27,7 @@ const RentCar = ({ allCars }) => {
     facade.addRental(carToRent);
     console.log(carToRent);
     setCarToRent({ ...carToRent });
+    setReloadTable(true);
   };
 
   return (
