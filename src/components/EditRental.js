@@ -4,7 +4,7 @@ import facade from "../utils/apiFacade";
 import React, { useState, useEffect } from "react";
 import { rentalObj, allCarsObj, carObj } from "../utils/types";
 
-const EditRental = ({ allRentals }) => {
+const EditRental = ({ allRentals, setReloadTable }) => {
   let { id } = useParams();
 
   const [rentalToEdit, setRentalToEdit] = useState(rentalObj);
@@ -28,11 +28,12 @@ const EditRental = ({ allRentals }) => {
         });
       }
     });
+    setReloadTable(true);
   }, [id]);
 
   const onChangeRental = (evt) => {
     evt.preventDefault();
-    console.log(evt.target.value);
+    console.log(rentalToEdit);
     setRentalToEdit({ ...rentalToEdit, [evt.target.id]: evt.target.value });
   };
 
@@ -59,6 +60,7 @@ const EditRental = ({ allRentals }) => {
       year: selectedCar.year,
       pricePerDay: selectedCar.pricePerDay,
     });
+    setReloadTable(true);
   };
 
   return (
@@ -74,6 +76,19 @@ const EditRental = ({ allRentals }) => {
               className="form-control"
               id="rentalDays"
               placeholder={rentalToEdit.rentalDays}
+              onChange={onChangeRental}
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label className="control-label col-sm-3" htmlFor="Breed">
+            Rental Date
+          </label>
+          <div className="col-sm-5">
+            <input
+              className="form-control"
+              id="rentalDate"
+              placeholder={rentalToEdit.rentalDate}
               onChange={onChangeRental}
             />
           </div>

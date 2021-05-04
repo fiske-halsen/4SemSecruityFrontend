@@ -11,19 +11,19 @@ import {
 } from "react-router-dom";
 import { allCarsObj } from "../utils/types";
 
-const User = () => {
+const User = ({ reloadTable, setReloadTable }) => {
   const [allCars, setAllCars] = useState(allCarsObj);
   const { path, url } = useRouteMatch();
 
   useEffect(() => {
     facade.fetchAllCars().then((cars) => setAllCars(cars));
-  }, []);
+  }, [reloadTable]);
 
   return (
     <div>
       <Switch>
         <Route path={`${path}/:model`}>
-          <RentCar allCars={allCars} />
+          <RentCar allCars={allCars} setReloadTable={setReloadTable} />
         </Route>
         <Route exact path={path}>
           <table class="table">
