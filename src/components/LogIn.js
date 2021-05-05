@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import facade from "../utils/apiFacade";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function LogIn({ login }) {
   const init = { username: "", password: "" };
@@ -37,7 +38,7 @@ function LoggedIn() {
 
   return (
     <div>
-      <h2>Data Received from server</h2>
+      <h2>Welcome to our SP car rental</h2>
       <h3>{dataFromServer}</h3>
     </div>
   );

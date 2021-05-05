@@ -69,9 +69,17 @@ function apiFacade() {
   };
   const fetchAllRentals = () => {
     const options = makeOptions("GET", true);
-    return fetch(URL + "/api/rental/getrentals/", options).then(
+    return fetch(URL + "/api/rental/getallrentals/", options).then(
       handleHttpErrors
     );
+  };
+
+  const fetchAllRentalsOneUser = (userName) => {
+    const options = makeOptions("GET", true);
+    return fetch(
+      URL + "/api/rental/getallrentalsoneuser/" + userName,
+      options
+    ).then(handleHttpErrors);
   };
 
   const deleteRental = (id) => {
@@ -133,6 +141,7 @@ function apiFacade() {
     editRental,
     deleteRental,
     getUserName,
+    fetchAllRentalsOneUser,
   };
 }
 

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import facade from "../utils/apiFacade";
 import LogIn, { LoggedIn } from "./LogIn.js";
 import Header from "./Header.js";
-import Admin from "./Admin.js";
+import AllRentals from "./AllRentals";
 import AllCars from "./AllCars";
 import { Switch, Route } from "react-router-dom";
+import MyRentals from "./MyRentals";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -35,7 +36,7 @@ function App() {
               <LogIn login={login} />
               <p>{error}</p>
             </Route>
-            <Route exact path="/user">
+            <Route exact path="/rentcar">
               <AllCars />
             </Route>
           </div>
@@ -48,7 +49,15 @@ function App() {
               </Route>
             </div>
             <div>
-              <Route path="/user">
+              <Route path="/myrentals">
+                {" "}
+                <MyRentals
+                  reloadTable={reloadTable}
+                  setReloadTable={setReloadTable}
+                />{" "}
+              </Route>
+
+              <Route path="/rentcar">
                 {(function () {
                   switch (facade.getRole()) {
                     case "user":
@@ -60,7 +69,7 @@ function App() {
                       );
                     case "admin":
                       return (
-                        <Admin
+                        <AllRentals
                           reloadTable={reloadTable}
                           setReloadTable={setReloadTable}
                         />
