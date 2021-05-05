@@ -12,7 +12,7 @@ import {
 import EditRental from "./EditRental";
 import { allRentalsObj } from "../utils/types";
 
-const Admin = ({ reloadTable, setReloadTable }) => {
+const AllRentals = ({ reloadTable, setReloadTable }) => {
   const [allRentals, setAllRentals] = useState(allRentalsObj);
   const { path, url } = useRouteMatch();
 
@@ -78,4 +78,4 @@ const Admin = ({ reloadTable, setReloadTable }) => {
   );
 };
 
-export default Admin;
+export default AllRentals;
