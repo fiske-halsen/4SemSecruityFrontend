@@ -3,9 +3,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import facade from "../utils/apiFacade";
 import React, { useState, useEffect } from "react";
 import { rentCarObj } from "../utils/types";
+import { NavLink, Route, useRouteMatch, Switch, Link } from "react-router-dom";
 
 const RentCar = ({ allCars, setReloadTable }) => {
   let { model } = useParams();
+  const { path, url } = useRouteMatch();
 
   const [carToRent, setCarToRent] = useState(rentCarObj);
   useEffect(() => {
@@ -23,6 +25,7 @@ const RentCar = ({ allCars, setReloadTable }) => {
   };
 
   const rentCar = (evt) => {
+    console.log(url);
     evt.preventDefault();
     facade.addRental(carToRent);
     console.log(carToRent);
@@ -116,8 +119,13 @@ const RentCar = ({ allCars, setReloadTable }) => {
 
         <div className="form-group">
           <div className="col-sm-offset-3 col-sm-9">
-            <button onClick={rentCar} type="submit" className="btn btn-primary">
-              Rent car
+            <button
+              onClick={rentCar}
+              Link
+              type="submit"
+              className="btn btn-primary"
+            >
+              <Link to={`/myrentals`}>Rent car</Link>
             </button>
           </div>
         </div>
