@@ -38,6 +38,20 @@ function apiFacade() {
       });
   };
 
+  const register = (user, password1, password2, imgUrl) => {
+    const options = makeOptions("POST", true, {
+      username: user,
+      password1: password1,
+      password2: password2,
+      imgUrl: imgUrl,
+    });
+    return fetch(URL + "/api/login/register", options)
+      .then(handleHttpErrors)
+      .then((res) => {
+        setToken(res.token);
+      });
+  };
+
   const getRole = () => {
     let myToken = getToken();
     let tokenData = myToken.split(".")[1];
@@ -142,6 +156,7 @@ function apiFacade() {
     deleteRental,
     getUserName,
     fetchAllRentalsOneUser,
+    register,
   };
 }
 

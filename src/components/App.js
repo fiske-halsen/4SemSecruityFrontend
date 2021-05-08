@@ -6,6 +6,7 @@ import AllRentals from "./AllRentals";
 import AllCars from "./AllCars";
 import { Switch, Route } from "react-router-dom";
 import MyRentals from "./MyRentals";
+import Register from "./Register";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -26,6 +27,15 @@ function App() {
       });
   };
 
+  const register = (user, pass1, pass2, imgUrl) => {
+    facade
+      .register(user, pass1, pass2, imgUrl)
+      .then((res) => setLoggedIn(true), setError(""))
+      .catch((err) => {
+        setError("Wrong username or password");
+      });
+  };
+
   return (
     <div>
       <Header token={facade.getToken()} />
@@ -34,6 +44,7 @@ function App() {
           <div>
             <Route exact path="/">
               <LogIn login={login} />
+              <Register register={register} />
               <p>{error}</p>
             </Route>
             <Route exact path="/rentcar">
