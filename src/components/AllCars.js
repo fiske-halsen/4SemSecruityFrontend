@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import RentCar from "./RentCar";
 import {
   NavLink,
+  Link,
   Route,
   useParams,
   useRouteMatch,
@@ -48,7 +49,7 @@ const User = ({ reloadTable, setReloadTable }) => {
                         Rent car
                       </NavLink>
                     ) : (
-                      <NavLink to={`/`}>Rent car</NavLink>
+                      <Link to={`/`}>Rent car</Link>
                     )}
                   </button>
                 </tr>
