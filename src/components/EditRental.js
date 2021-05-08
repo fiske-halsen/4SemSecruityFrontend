@@ -13,19 +13,20 @@ const EditRental = ({ allRentals, setReloadTable }) => {
 
   useEffect(() => {
     facade.fetchAllCars().then((cars) => setAllCars(cars));
-  }, []);
+    console.log(allCars.cars[0]);
+  }, [id]);
 
   useEffect(() => {
     allRentals.rentals.forEach((rental) => {
       if (rental.id == id) {
         setRentalToEdit({ ...rental, userName: rental.userName, id: id });
-        setSelectedCar({
+        /*setSelectedCar({
           ...selectedCar,
           brand: rental.brand,
           model: rental.model,
           year: rental.year,
           pricePerDay: rental.pricePerDay,
-        });
+        });*/
       }
     });
     setReloadTable(true);
@@ -43,24 +44,22 @@ const EditRental = ({ allRentals, setReloadTable }) => {
     allCars.cars.forEach((car) => {
       if (car.model === model) {
         setSelectedCar({ ...car });
+        setRentalToEdit({
+          ...rentalToEdit,
+          brand: selectedCar.brand,
+          model: selectedCar.model,
+          year: selectedCar.year,
+          pricePerDay: selectedCar.pricePerDay,
+        });
       }
     });
-
-    console.log(selectedCar);
   };
 
   const editRental = (evt) => {
     evt.preventDefault();
     facade.editRental(rentalToEdit);
-    console.log(rentalToEdit);
-    setRentalToEdit({
-      ...rentalToEdit,
-      brand: selectedCar.brand,
-      model: selectedCar.model,
-      year: selectedCar.year,
-      pricePerDay: selectedCar.pricePerDay,
-    });
     setReloadTable(true);
+    setRentalToEdit({ ...rentalObj });
   };
 
   return (
@@ -104,8 +103,9 @@ const EditRental = ({ allRentals, setReloadTable }) => {
               value={selectedCar.model}
               onChange={onChangeCar}
             >
+              <option value="">Select a car</option>
               {allCars.cars.map((car) => (
-                <option value={car.model}>{car.model}</option>
+                <option value={car.model}>{car.brand + " " + car.model}</option>
               ))}
             </select>
           </div>
