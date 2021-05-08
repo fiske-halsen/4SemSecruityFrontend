@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import facade from "../utils/apiFacade";
 import React, { useState, useEffect } from "react";
@@ -119,7 +119,7 @@ const EditRental = ({ allRentals, setReloadTable }) => {
               type="submit"
               className="btn btn-primary"
             >
-              Edit rental
+              <Link to={`/rentcar`}>Edit car</Link>
             </button>
           </div>
         </div>

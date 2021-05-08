@@ -2,7 +2,7 @@ import facade from "../utils/apiFacade";
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavLink, Route, useRouteMatch, Switch } from "react-router-dom";
-import EditRental from "./EditRental";
+
 import { allRentalsObj } from "../utils/types";
 
 const MyRentals = ({ reloadTable, setReloadTable }) => {
@@ -13,6 +13,7 @@ const MyRentals = ({ reloadTable, setReloadTable }) => {
       .fetchAllRentalsOneUser(facade.getUserName())
       .then((rentals) => setAllRentals(rentals));
     setReloadTable(false);
+
     console.log(allRentals);
   }, [reloadTable]);
 
