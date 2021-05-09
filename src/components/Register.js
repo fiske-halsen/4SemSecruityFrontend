@@ -60,13 +60,61 @@ function Register({ register }) {
   return (
     <div>
       <h2>Register</h2>
-      <form onChange={onChange}>
-        <input placeholder="User Name" id="username" />
-        <input placeholder="Password1" id="password1" />
-        <input placeholder="Password2" id="password2" />
-        <input type="file" onChange={onChangeImage} />
-        <button onClick={performRegister}>Register</button>
-        <progress value={progress} max="100" />
+      <form className="form-horizontal">
+        <div className="form-group">
+          <label className="control-label col-sm-3" htmlFor="Breed">
+            Username
+          </label>
+          <div className="col-sm-2">
+            <input
+              className="form-control"
+              id="username"
+              placeholder="Username"
+              onChange={onChange}
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label className="control-label col-sm-3" htmlFor="Breed">
+            Password
+          </label>
+          <div className="col-sm-2">
+            <input
+              type="password"
+              className="form-control"
+              id="password1"
+              placeholder="Password"
+              onChange={onChange}
+            />
+          </div>
+          <div className="form-group">
+            <label className="control-label col-sm-3" htmlFor="Breed">
+              Password
+            </label>
+            <div className="col-sm-2">
+              <input
+                type="password"
+                className="form-control"
+                id="password2"
+                placeholder="Password"
+                onChange={onChange}
+              />
+            </div>
+          </div>
+          <input type="file" onChange={onChangeImage} />
+          <progress value={progress} max="100" />
+          <div className="form-group mt-3">
+            <div className="col-sm-offset-3 col-sm-9">
+              <button
+                onClick={performRegister}
+                type="submit"
+                className="btn btn-primary"
+              >
+                Register
+              </button>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   );

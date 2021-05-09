@@ -8,6 +8,7 @@ import { NavLink, Route, useRouteMatch, Switch, Link } from "react-router-dom";
 const RentCar = ({ allCars, setReloadTable }) => {
   let { model } = useParams();
   const { path, url } = useRouteMatch();
+  const [error, setError] = useState("");
 
   const [carToRent, setCarToRent] = useState(rentCarObj);
   useEffect(() => {
@@ -25,10 +26,15 @@ const RentCar = ({ allCars, setReloadTable }) => {
   };
 
   const rentCar = (evt) => {
-    console.log(url);
     evt.preventDefault();
-    facade.addRental(carToRent);
-    console.log(carToRent);
+    facade
+      .addRental(carToRent)
+      .then((res) => setError(""))
+      .catch((err) => {
+        err.fullError.then((mes) => {
+          setError(mes.message);
+        });
+      });
     setCarToRent({ ...carToRent });
     setReloadTable(true);
   };
@@ -127,6 +133,7 @@ const RentCar = ({ allCars, setReloadTable }) => {
             >
               <Link to={`/myrentals`}>Rent car</Link>
             </button>
+            <p>{error}</p>
           </div>
         </div>
       </form>
