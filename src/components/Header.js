@@ -30,7 +30,7 @@ function Header(props) {
                       {" "}
                       <li>
                         <NavLink exact activeClassName="active" to="/">
-                          Login
+                          My Profile
                         </NavLink>
                       </li>
                       <li>

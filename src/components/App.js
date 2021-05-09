@@ -23,7 +23,9 @@ function App() {
       .login(user, pass)
       .then((res) => setLoggedIn(true), setError(""))
       .catch((err) => {
-        setError("Wrong username or password");
+        err.fullError.then((mes) => {
+          setError(mes.message);
+        });
       });
   };
 
@@ -32,7 +34,9 @@ function App() {
       .register(user, pass1, pass2, imgUrl)
       .then((res) => setLoggedIn(true), setError(""))
       .catch((err) => {
-        setError("Wrong username or password");
+        err.fullError.then((mes) => {
+          setError(mes.message);
+        });
       });
   };
 

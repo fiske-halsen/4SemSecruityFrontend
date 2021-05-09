@@ -21,10 +21,45 @@ function LogIn({ login }) {
   return (
     <div>
       <h2>Login</h2>
-      <form onChange={onChange}>
-        <input placeholder="User Name" id="username" />
-        <input placeholder="Password" id="password" />
-        <button onClick={performLogin}>Login</button>
+      <form className="form-horizontal">
+        <div className="form-group">
+          <label className="control-label col-sm-3" htmlFor="Breed">
+            Username
+          </label>
+          <div className="col-sm-2">
+            <input
+              className="form-control"
+              id="username"
+              placeholder="Username"
+              onChange={onChange}
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label className="control-label col-sm-3" htmlFor="Breed">
+            Password
+          </label>
+          <div className="col-sm-2">
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              placeholder="Password"
+              onChange={onChange}
+            />
+          </div>
+          <div className="form-group mt-3">
+            <div className="col-sm-offset-3 col-sm-9">
+              <button
+                onClick={performLogin}
+                type="submit"
+                className="btn btn-primary"
+              >
+                Login
+              </button>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   );

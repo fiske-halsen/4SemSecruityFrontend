@@ -10,23 +10,16 @@ const EditRental = ({ allRentals, setReloadTable }) => {
   const [rentalToEdit, setRentalToEdit] = useState(rentalObj);
   const [allCars, setAllCars] = useState(allCarsObj);
   const [selectedCar, setSelectedCar] = useState(carObj);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     facade.fetchAllCars().then((cars) => setAllCars(cars));
-    console.log(allCars.cars[0]);
   }, [id]);
 
   useEffect(() => {
     allRentals.rentals.forEach((rental) => {
       if (rental.id == id) {
         setRentalToEdit({ ...rental, userName: rental.userName, id: id });
-        /*setSelectedCar({
-          ...selectedCar,
-          brand: rental.brand,
-          model: rental.model,
-          year: rental.year,
-          pricePerDay: rental.pricePerDay,
-        });*/
       }
     });
     setReloadTable(true);
@@ -57,7 +50,14 @@ const EditRental = ({ allRentals, setReloadTable }) => {
 
   const editRental = (evt) => {
     evt.preventDefault();
-    facade.editRental(rentalToEdit);
+    facade
+      .editRental(rentalToEdit)
+      .then((res) => setError(""))
+      .catch((err) => {
+        err.fullError.then((mes) => {
+          setError(mes.message);
+        });
+      });
     setReloadTable(true);
     setRentalToEdit({ ...rentalObj });
   };
@@ -121,6 +121,7 @@ const EditRental = ({ allRentals, setReloadTable }) => {
             >
               <Link to={`/rentcar`}>Edit car</Link>
             </button>
+            <p>{error}</p>
           </div>
         </div>
       </form>
