@@ -2,24 +2,19 @@ import React, { useState, useEffect } from "react";
 import facade from "../utils/apiFacade";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { storage } from "../firebase/index";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function Register({ register }) {
   const init = { username: "", password1: "", password2: "" };
   const [registerCredentials, setRegisterCredentials] = useState(init);
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
-  const [imgUrl, setUrl] = useState("");
+  const [reToken, setReToken] = useState("");
+  const [url, setUrl] = useState("");
 
   const performRegister = (evt) => {
     evt.preventDefault();
-    setTimeout(() => {
-      register(
-        registerCredentials.username,
-        registerCredentials.password1,
-        registerCredentials.password2,
-        imgUrl
-      );
-    }, 1000);
+
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
       "state_changed",
@@ -37,11 +32,24 @@ function Register({ register }) {
           .ref("images")
           .child(image.name)
           .getDownloadURL()
-          .then((imgUrl) => {
-            setUrl(imgUrl);
+          .then((url) => {
+            register(
+              registerCredentials.username,
+              registerCredentials.password1,
+              registerCredentials.password2,
+              reToken,
+              url
+            );
           });
+
+        console.log(url);
       }
     );
+    setReToken("");
+  };
+
+  const onChangeRecap = (value) => {
+    setReToken(value);
   };
 
   const onChangeImage = (e) => {
@@ -105,6 +113,10 @@ function Register({ register }) {
           <progress value={progress} max="100" />
           <div className="form-group mt-3">
             <div className="col-sm-offset-3 col-sm-9">
+              <ReCAPTCHA
+                sitekey="6LfPttgaAAAAAIeRoR1vBgLGKXKee0367pPuGKek"
+                onChange={onChangeRecap}
+              />
               <button
                 onClick={performRegister}
                 type="submit"
