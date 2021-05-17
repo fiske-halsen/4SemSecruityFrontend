@@ -25,12 +25,14 @@ function apiFacade() {
     localStorage.removeItem("jwtToken");
   };
 
-  const login = (user, password) => {
+  const login = (user, password, retoken) => {
     const options = makeOptions("POST", true, {
       username: user,
       password: password,
+      retoken: retoken,
     });
 
+    console.log(retoken);
     return fetch(URL + "/api/login", options)
       .then(handleHttpErrors)
       .then((res) => {
