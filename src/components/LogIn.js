@@ -1,14 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import facade from "../utils/apiFacade";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import ReCAPTCHA from "react-google-recaptcha";
 function LogIn({ login }) {
-  const init = { username: "", password: "" };
+  const init = { username: "", password: "", retoken: "" };
   const [loginCredentials, setLoginCredentials] = useState(init);
+  const reRef = useRef();
 
-  const performLogin = (evt) => {
+  const performLogin = async (evt) => {
     evt.preventDefault();
-    login(loginCredentials.username, loginCredentials.password);
+    //const token = await reRef.current.executeAsync();
+    //console.log("---------------" + token);
+    setLoginCredentials({ ...loginCredentials, retoken: "token" });
+    login(
+      loginCredentials.username,
+      loginCredentials.password,
+      loginCredentials.retoken
+    );
+    console.log("aaaaaaaa         " + loginCredentials.retoken);
+    //reRef.current.reset();
   };
 
   const onChange = (evt) => {
@@ -50,6 +60,11 @@ function LogIn({ login }) {
           </div>
           <div className="form-group mt-3">
             <div className="col-sm-offset-3 col-sm-9">
+              <ReCAPTCHA
+                sitekey="6LfliNgaAAAAAGgsgBd7tHREZC8b2pewXlBsVkT1"
+                size="invisible"
+                ref={reRef}
+              />
               <button
                 onClick={performLogin}
                 type="submit"
