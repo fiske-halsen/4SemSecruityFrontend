@@ -29,9 +29,9 @@ function App() {
       });
   };
 
-  const register = (user, pass1, pass2, imgUrl) => {
+  const register = (user, pass1, pass2, reToken, imgUrl) => {
     facade
-      .register(user, pass1, pass2, imgUrl)
+      .register(user, pass1, pass2, reToken, imgUrl)
       .then((res) => setLoggedIn(true), setError(""))
       .catch((err) => {
         err.fullError.then((mes) => {

@@ -39,11 +39,12 @@ function apiFacade() {
       });
   };
 
-  const register = (user, password1, password2, imgUrl) => {
+  const register = (user, password1, password2, reToken, imgUrl) => {
     const options = makeOptions("POST", true, {
       username: user,
       password1: password1,
       password2: password2,
+      retoken: reToken,
       imgUrl: imgUrl,
     });
     return fetch(URL + "/api/login/register", options)

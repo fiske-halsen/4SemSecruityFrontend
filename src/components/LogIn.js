@@ -58,13 +58,6 @@ function LogIn({ login }) {
           </div>
           <div className="form-group mt-3">
             <div className="col-sm-offset-3 col-sm-9">
-              {/* <ReCAPTCHA
-                sitekey="6LfPttgaAAAAAIeRoR1vBgLGKXKee0367pPuGKek"
-                //size="invisible"
-
-                ref={reRef}
-              /> */}
-
               <ReCAPTCHA
                 sitekey="6LfPttgaAAAAAIeRoR1vBgLGKXKee0367pPuGKek"
                 onChange={onChangeRecap}
