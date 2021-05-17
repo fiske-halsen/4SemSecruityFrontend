@@ -5,16 +5,13 @@ import ReCAPTCHA from "react-google-recaptcha";
 function LogIn({ login }) {
   const init = { username: "", password: "" };
   const [loginCredentials, setLoginCredentials] = useState(init);
-  const reRef = useRef();
+  const [reToken, setReToken] = useState("");
 
   const performLogin = async (evt) => {
     evt.preventDefault();
-    const retoken = await reRef.current.executeAsync();
-    console.log("---------------" + retoken);
 
-    login(loginCredentials.username, loginCredentials.password, retoken);
-
-    reRef.current.reset();
+    login(loginCredentials.username, loginCredentials.password, reToken);
+    setReToken("");
   };
 
   const onChange = (evt) => {
@@ -22,6 +19,11 @@ function LogIn({ login }) {
       ...loginCredentials,
       [evt.target.id]: evt.target.value,
     });
+  };
+
+  const onChangeRecap = (value) => {
+    setReToken(value);
+    console.log(value);
   };
 
   return (
@@ -56,10 +58,16 @@ function LogIn({ login }) {
           </div>
           <div className="form-group mt-3">
             <div className="col-sm-offset-3 col-sm-9">
-              <ReCAPTCHA
-                sitekey="6LfliNgaAAAAAGgsgBd7tHREZC8b2pewXlBsVkT1"
-                size="invisible"
+              {/* <ReCAPTCHA
+                sitekey="6LfPttgaAAAAAIeRoR1vBgLGKXKee0367pPuGKek"
+                //size="invisible"
+
                 ref={reRef}
+              /> */}
+
+              <ReCAPTCHA
+                sitekey="6LfPttgaAAAAAIeRoR1vBgLGKXKee0367pPuGKek"
+                onChange={onChangeRecap}
               />
               <button
                 onClick={performLogin}
