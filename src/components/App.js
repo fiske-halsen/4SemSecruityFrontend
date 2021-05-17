@@ -18,9 +18,9 @@ function App() {
     setLoggedIn(false);
   };
 
-  const login = (user, pass) => {
+  const login = (user, pass, retoken) => {
     facade
-      .login(user, pass)
+      .login(user, pass, retoken)
       .then((res) => setLoggedIn(true), setError(""))
       .catch((err) => {
         err.fullError.then((mes) => {

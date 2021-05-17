@@ -3,22 +3,18 @@ import facade from "../utils/apiFacade";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ReCAPTCHA from "react-google-recaptcha";
 function LogIn({ login }) {
-  const init = { username: "", password: "", retoken: "" };
+  const init = { username: "", password: "" };
   const [loginCredentials, setLoginCredentials] = useState(init);
   const reRef = useRef();
 
   const performLogin = async (evt) => {
     evt.preventDefault();
-    //const token = await reRef.current.executeAsync();
-    //console.log("---------------" + token);
-    setLoginCredentials({ ...loginCredentials, retoken: "token" });
-    login(
-      loginCredentials.username,
-      loginCredentials.password,
-      loginCredentials.retoken
-    );
-    console.log("aaaaaaaa         " + loginCredentials.retoken);
-    //reRef.current.reset();
+    const retoken = await reRef.current.executeAsync();
+    console.log("---------------" + retoken);
+
+    login(loginCredentials.username, loginCredentials.password, retoken);
+
+    reRef.current.reset();
   };
 
   const onChange = (evt) => {
