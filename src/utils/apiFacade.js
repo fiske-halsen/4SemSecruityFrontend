@@ -31,7 +31,6 @@ function apiFacade() {
       password: password,
       retoken: retoken,
     });
-
     console.log(retoken);
     return fetch(URL + "/api/login", options)
       .then(handleHttpErrors)
