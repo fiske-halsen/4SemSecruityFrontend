@@ -59,7 +59,7 @@ function LogIn({ login }) {
           <div className="form-group mt-3">
             <div className="col-sm-offset-3 col-sm-9">
               <ReCAPTCHA
-                sitekey="6LfliNgaAAAAAGgsgBd7tHREZC8b2pewXlBsVkT1"
+                sitekey="6LfPttgaAAAAAIeRoR1vBgLGKXKee0367pPuGKek"
                 onChange={onChangeRecap}
               />
               <button
