@@ -114,7 +114,7 @@ function Register({ register }) {
           <div className="form-group mt-3">
             <div className="col-sm-offset-3 col-sm-9">
               <ReCAPTCHA
-                sitekey="6LfPttgaAAAAAIeRoR1vBgLGKXKee0367pPuGKek"
+                sitekey="6LfiyusaAAAAAPNN314dKor_W6Ni8a0VGu0yHJNc"
                 onChange={onChangeRecap}
               />
               <button
