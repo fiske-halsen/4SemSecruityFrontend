@@ -1,3 +1,3 @@
-let URL = "http://localhost:8080/jpareststarter"
+let URL = "https://coding-freak.com/4semSecurityBackend";
 
-export {URL};
+export { URL };
